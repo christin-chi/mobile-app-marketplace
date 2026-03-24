@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile-app-marketplace",
-    "slug": "mobile-app-marketplace",
+    "name": "Grow Therapy",
+    "slug": "grow-therapy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,19 +12,34 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.mobileappmarketplace",
+      "infoPlist": {
+        "CFBundleDisplayName": "Grow Therapy"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#000000",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.mobileappmarketplace"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-font",
+      "expo-video",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Grow Therapy uses your location to show therapists and care options near you."
+        }
+      ]
+    ]
   }
 }
