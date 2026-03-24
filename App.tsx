@@ -9,6 +9,11 @@ import {
   setOnboardingCompleted,
 } from "./src/storage/onboardingStorage";
 
+/** Set `EXPO_PUBLIC_FORCE_ONBOARDING=1` in `.env` or when starting Expo (see `.env.example`). */
+const FORCE_ONBOARDING =
+  process.env.EXPO_PUBLIC_FORCE_ONBOARDING === "true" ||
+  process.env.EXPO_PUBLIC_FORCE_ONBOARDING === "1";
+
 type AppRoute = "onboarding" | "auth" | "main";
 
 export default function App() {
@@ -26,7 +31,11 @@ export default function App() {
     let cancelled = false;
     getOnboardingCompleted().then((done) => {
       if (!cancelled) {
-        setRoute(done ? "main" : "onboarding");
+        if (FORCE_ONBOARDING) {
+          setRoute("onboarding");
+        } else {
+          setRoute(done ? "main" : "onboarding");
+        }
         setStorageReady(true);
       }
     });
