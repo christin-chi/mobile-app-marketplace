@@ -4,6 +4,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type ComponentProps,
 } from "react";
 import {
   Animated,
@@ -612,11 +613,13 @@ export function FilterMenuSheet({
                     </View>
                     <View style={styles.closeIconLayer} pointerEvents="none">
                       <SymbolView
-                        name={{
-                          ios: "arrow.left",
-                          android: "arrow_back",
-                          web: "arrow_back",
-                        }}
+                        name={
+                          {
+                            ios: "arrow.left",
+                            android: "arrow_back",
+                            web: "arrow_back",
+                          } as unknown as ComponentProps<typeof SymbolView>["name"]
+                        }
                         size={22}
                         tintColor="#ffffff"
                         fallback={

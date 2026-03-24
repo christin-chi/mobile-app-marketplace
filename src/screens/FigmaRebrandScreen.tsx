@@ -1,7 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { BlurView } from "expo-blur";
 import { SymbolView } from "expo-symbols";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ComponentProps,
+} from "react";
 import {
   Animated,
   Image,
@@ -527,11 +534,13 @@ export default function FigmaRebrandScreen({ onLogout }: FigmaRebrandScreenProps
             </View>
             <View style={styles.filterIconLayer} pointerEvents="none">
               <SymbolView
-                name={{
-                  ios: "equal",
-                  android: "equal",
-                  web: "equal",
-                }}
+                name={
+                  {
+                    ios: "equal",
+                    android: "equal",
+                    web: "equal",
+                  } as unknown as ComponentProps<typeof SymbolView>["name"]
+                }
                 size={24}
                 tintColor="#ffffff"
                 fallback={<EqualGlyph />}
