@@ -54,7 +54,12 @@ export default function App() {
   }
 
   if (route === "onboarding") {
-    return <OnboardingScreen onComplete={handleOnboardingComplete} />;
+    return (
+      <OnboardingScreen
+        onComplete={handleOnboardingComplete}
+        onLogin={handleOnboardingComplete}
+      />
+    );
   }
 
   if (route === "auth") {

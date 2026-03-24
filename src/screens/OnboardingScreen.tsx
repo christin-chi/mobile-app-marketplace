@@ -60,9 +60,10 @@ const STEPS: Step[] = [
 
 type Props = {
   onComplete: () => void | Promise<void>;
+  onLogin?: () => void | Promise<void>;
 };
 
-export default function OnboardingScreen({ onComplete }: Props) {
+export default function OnboardingScreen({ onComplete, onLogin }: Props) {
   const { width: screenW, height: screenH } = useWindowDimensions();
   const scrollRef = useRef<ScrollView>(null);
   const logoHeight = useRef(new Animated.Value(GROW_LOGO_BASE_H)).current;
@@ -105,6 +106,16 @@ export default function OnboardingScreen({ onComplete }: Props) {
           <View style={styles.logoWrap} accessibilityRole="header">
             <GrowLogoVector width={GROW_LOGO_BASE_W} height={logoHeight} />
           </View>
+          {onLogin && (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Log in"
+              onPress={() => void onLogin()}
+              style={({ pressed }) => [styles.loginLink, pressed && styles.loginLinkPressed]}
+            >
+              <Text style={styles.loginLinkText}>Log in</Text>
+            </Pressable>
+          )}
         </View>
 
         <View style={styles.body}>
@@ -214,12 +225,25 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 8,
     paddingBottom: 8,
   },
   logoWrap: {
     alignItems: "flex-start",
+  },
+  loginLink: {
+    paddingVertical: 6,
+    paddingHorizontal: 4,
+  },
+  loginLinkPressed: {
+    opacity: 0.6,
+  },
+  loginLinkText: {
+    color: "#ffffff",
+    fontSize: 15,
+    fontFamily: "SeasonSansSemiBold",
   },
   body: {
     flex: 1,
